@@ -1,0 +1,229 @@
+{
+  "openapi":"3.0.0",
+  "info":{
+    "title":"Atlas",
+    "description":"Essa é uma documentação sobre a Atlas API.",
+    "version":"1.0.0",
+    "contact":{
+      "email":"mail@mail.com.br"
+    }
+  },
+    "paths":{
+      "/users":{
+        "post":{
+          "tags":["users"],
+          "summary":"Cria um novo usuário",
+          "description":"Cria um novo usuário",
+          "requestBody":{
+            "description":"Valor retornado",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "email":{
+                      "type":"string"
+                    },
+                    "name":{
+                      "type":"string"
+                    }
+                  },
+                  "example":{
+                    "email":"email sample",
+                    "name":"name sample"
+                  }
+                }
+              }
+            }
+          },
+          "responses":{
+            "201":{
+              "description":"Operação realizada com sucesso",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type":"object",
+                    "properties":{
+                      "name":{
+                        "type":"string",
+                        "example":"Jonas"
+                      },
+                      "email":{
+                        "type":"string",
+                        "example":"jonas@jonas.com.br"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400":{
+              "description":"User alredy exists"
+            }
+          }
+        },
+        "get":{
+          "tags":["users"],
+          "sumary":"Retorna uma lista de usuários",
+          "description":"Retorna uma lista de usuários",
+          "responses":{
+            "200":{
+              "description":"Retornada a lista de usuários",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type":"array",
+                    "items":
+                      {
+                        "type":"object",
+                        "properties":{
+                          "id":{
+                            "type":"string",
+                            "example":"b3f6ce4e-f25b-447e-8541-8acd7084a5e2"
+                          },
+                          "name":{
+                            "type":"string",
+                            "example":"Jonas"
+                          },
+                          "admin":{
+                            "type":"boolean",
+                            "example":true
+                          },
+                          "email":{
+                            "type":"string",
+                            "example":"jonas@jonas.com.br"
+                          },
+                          "created_at":{
+                            "type":"Date",
+                            "example":"2021-06-25T23:53:19.055Z"
+                          },
+                          "updated_at":{
+                            "type":"Date",
+                            "example":"2021-06-25T23:53:19.055Z"
+                          }
+                        }
+                      }
+                  }
+                }
+              }
+            },
+            "404":{
+              "description":"User not exists | User must be an administrator."
+            }
+          }
+        }       
+      },
+      "/users/{user_id}":{
+        "get":{
+          "tags":["users"],
+          "sumary":"Retorna o perfil do usuário",
+          "description":"Retorna o perfil do usuário",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "path",
+              "description": "Id do usuário que está requisitando",
+              "required": true,
+              "type": "object"
+            }],
+          "responses":{
+            "200":{
+              "description":"Retorna o perfil do usuário",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type":"object",
+                    "properties":{
+                      "id":{
+                        "type":"string",
+                        "example":"b3f6ce4e-f25b-447e-8541-8acd7084a5e2"
+                      },
+                      "name":{
+                        "type":"string",
+                        "example":"Jonas"
+                      },
+                      "admin":{
+                        "type":"boolean",
+                        "example":true
+                      },
+                      "email":{
+                        "type":"string",
+                        "example":"jonas@jonas.com.br"
+                      },
+                      "created_at":{
+                        "type":"Date",
+                        "example":"2021-06-25T23:53:19.055Z"
+                      },
+                      "updated_at":{
+                        "type":"Date",
+                        "example":"2021-06-25T23:53:19.055Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404":{
+              "description":"User not exists | User must be an administrator."
+            }
+          }
+        }
+      },
+      "/users/{user_id}/admin":{
+        "patch":{
+          "tags":["users"],
+          "sumary":"Torna admin um usuário",
+          "parameters":[
+            {
+              "name": "user_id",
+              "in": "path",
+              "description": "Id do usuário que será tornado um admin",
+              "required": true,
+              "type": "object"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Retorna o usuário tornado admin",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type":"object",
+                    "properties":{
+                      "id":{
+                        "type":"string",
+                        "example":"b3f6ce4e-f25b-447e-8541-8acd7084a5e2"
+                      },
+                      "name":{
+                        "type":"string",
+                        "example":"Jonas"
+                      },
+                      "admin":{
+                        "type":"boolean",
+                        "example":true
+                      },
+                      "email":{
+                        "type":"string",
+                        "example":"jonas@jonas.com.br"
+                      },
+                      "created_at":{
+                        "type":"Date",
+                        "example":"2021-06-25T23:53:19.055Z"
+                      },
+                      "updated_at":{
+                        "type":"Date",
+                        "example":"2021-06-25T23:53:19.055Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404":{
+              "description":"User not exists"
+            }
+          }
+        }
+      }
+    }
+  }
